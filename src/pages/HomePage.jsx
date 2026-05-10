@@ -1,150 +1,415 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Users, Shield, Target } from 'lucide-react';
+
+import { ArrowRight } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
+
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 
+import PageLayout from '@/components/PageLayout.jsx';
+import SectionHeader from '@/components/SectionHeader.jsx';
+import CTASection from '@/components/CTASection.jsx';
+
+
+/* =========================================================
+   HERO
+========================================================= */
+import heroImage from '@/assets/home/hero.jpg';
+
+
+/* =========================================================
+   CORE CAPABILITIES
+========================================================= */
+import partnershipImage from '@/assets/home/partnership.jpg';
+import reliabilityImage from '@/assets/home/reliability.jpg';
+import innovationImage from '@/assets/home/innovation.jpg';
+
+
+/* =========================================================
+   INDUSTRIES
+========================================================= */
+import governmentImage from '@/assets/home/government.jpg';
+import telecomImage from '@/assets/home/telecom.jpg';
+import defenceImage from '@/assets/home/defence.jpg';
+import educationImage from '@/assets/home/education.jpg';
+import healthcareImage from '@/assets/home/healthcare.jpg';
+import infrastructureImage from '@/assets/home/infrastructure.jpg';
+
+
+/* =========================================================
+   DATA
+========================================================= */
+const capabilities = [
+  {
+    image: partnershipImage,
+    title: 'Strategic Partnerships',
+    description:
+      'We build long-term relationships with clients, institutions, suppliers, and strategic stakeholders.',
+  },
+
+  {
+    image: reliabilityImage,
+    title: 'Operational Reliability',
+    description:
+      'Projects, procurement, and technology solutions delivered with consistency, accountability, and trust.',
+  },
+
+  {
+    image: innovationImage,
+    title: 'Innovation & AI',
+    description:
+      'Emerging technologies, automation, artificial intelligence, and digital transformation initiatives.',
+  },
+];
+
+
+const industries = [
+  {
+    image: governmentImage,
+    title: 'Government',
+  },
+
+  {
+    image: telecomImage,
+    title: 'Telecom',
+  },
+
+  {
+    image: defenceImage,
+    title: 'Defence',
+  },
+
+  {
+    image: educationImage,
+    title: 'Education',
+  },
+
+  {
+    image: healthcareImage,
+    title: 'Healthcare',
+  },
+
+  {
+    image: infrastructureImage,
+    title: 'Infrastructure',
+  },
+];
+
+
+/* =========================================================
+   MAIN
+========================================================= */
 function HomePage() {
-  const values = [
-    {
-      icon: Users,
-      title: 'Teamwork',
-      description: 'We believe in the power of collaboration. Our team works together to deliver exceptional results for every client.',
-    },
-    {
-      icon: Shield,
-      title: 'Reliability',
-      description: 'Count on us to deliver on our promises. We build lasting relationships through consistent, dependable service.',
-    },
-    {
-      icon: Target,
-      title: 'Customer Satisfaction',
-      description: 'Your success is our priority. We go above and beyond to ensure every project exceeds expectations.',
-    },
-  ];
 
   return (
     <>
       <Helmet>
-        <title>TeleFort (Pvt.) Ltd - Turnkey Solutions for Your Business</title>
-        <meta
-          name="description"
-          content="TeleFort delivers comprehensive turnkey solutions with a commitment to customer satisfaction, teamwork, and reliability. Trust us to bring your projects to life."
-        />
+
+        <title>
+          TeleFort (Pvt) Ltd
+        </title>
+
       </Helmet>
 
-      <div className="min-h-screen flex flex-col">
+
+      <div className="min-h-screen flex flex-col bg-background">
+
         <Header />
 
+
         <main className="flex-1">
-          <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
+
+
+          {/* =====================================================
+             HERO
+          ====================================================== */}
+          <section
+            className="
+              relative
+              flex
+              items-center
+              overflow-hidden
+            "
+            style={{ minHeight: '65vh' }}
+          >
+
             <div
-              className="absolute inset-0 z-0"
+              className="absolute inset-0"
               style={{
-                backgroundImage: 'url(https://images.unsplash.com/photo-1607615896122-6c919f897e55)',
+                backgroundImage: `url(${heroImage})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/85 to-gray-900/75"></div>
+
+              <div className="absolute inset-0 bg-black/70" />
+
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+
+            <div className="relative z-10 max-w-7xl mx-auto px-4">
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="max-w-3xl"
+                className="max-w-4xl"
               >
+
                 <h1
-                  className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
-                  style={{ letterSpacing: '-0.02em', textWrap: 'balance' }}
+                  className="
+                    text-4xl
+                    md:text-5xl
+                    lg:text-6xl
+                    font-bold
+                    text-white
+                    leading-tight
+                    mb-6
+                  "
                 >
-                  Turnkey solutions built on trust and reliability
+
+                  Engineering Tomorrow with Infrastructure,
+                  Supply & Emerging Technologies
+
                 </h1>
-                <p className="text-xl text-gray-200 leading-relaxed mb-8 max-w-2xl">
-                  We deliver comprehensive solutions that bring your vision to life. With a focus on customer satisfaction and a commitment to excellence, TeleFort is your trusted partner for success.
+
+
+                <p
+                  className="
+                    text-xl
+                    text-white/90
+                    leading-relaxed
+                    mb-8
+                  "
+                >
+
+                  TeleFort delivers engineering excellence,
+                  infrastructure development, strategic procurement,
+                  industrial operations, and future-ready technologies.
+
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button asChild size="lg" className="transition-all duration-200 active:scale-[0.98]">
+
+
+                <div className="flex gap-4 flex-wrap">
+
+                  <Button asChild size="lg">
+
                     <Link to="/contact">
-                      Get Started <ArrowRight className="ml-2 h-5 w-5" />
+
+                      Get Started
+
+                      <ArrowRight className="ml-2 h-5 w-5" />
+
                     </Link>
+
                   </Button>
-                  <Button asChild variant="outline" size="lg" className="bg-white/10 text-white border-white/20 hover:bg-white/20 transition-all duration-200 active:scale-[0.98]">
-                    <Link to="/services">Explore Services</Link>
+
+
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="lg"
+                    className="
+                      bg-white/10
+                      text-white
+                      border-white/20
+                    "
+                  >
+
+                    <Link to="/services">
+
+                      Explore Services
+
+                    </Link>
+
                   </Button>
+
                 </div>
+
               </motion.div>
+
             </div>
+
           </section>
 
-          <section className="py-20 bg-background">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-16"
-              >
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4" style={{ textWrap: 'balance' }}>
-                  Why choose TeleFort
-                </h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Our core values drive everything we do, ensuring exceptional results for every client.
-                </p>
-              </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {values.map((value, index) => (
+
+          <PageLayout>
+
+
+            {/* =====================================================
+               CORE CAPABILITIES
+            ====================================================== */}
+            <section>
+
+              <SectionHeader
+                title="Core Capabilities"
+                subtitle="Strategic strengths that power every engagement."
+              />
+
+
+              <div className="grid md:grid-cols-3 gap-8">
+
+                {capabilities.map((item, index) => (
+
                   <motion.div
-                    key={value.title}
+                    key={item.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="bg-card rounded-2xl p-8 shadow-lg border border-border hover:shadow-xl transition-all duration-300"
+                    transition={{ delay: index * 0.08 }}
+                    className="
+                      relative
+                      rounded-3xl
+                      overflow-hidden
+                      shadow-xl
+                      h-[170px]
+                    "
                   >
-                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
-                      <value.icon className="h-7 w-7 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-semibold text-card-foreground mb-3">{value.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{value.description}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
 
-          <section className="py-20 bg-primary text-primary-foreground">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ textWrap: 'balance' }}>
-                  Ready to start your project?
-                </h2>
-                <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-                  Let's discuss how we can help bring your vision to life with our turnkey solutions.
-                </p>
-                <Button asChild size="lg" variant="secondary" className="transition-all duration-200 active:scale-[0.98]">
-                  <Link to="/contact">Contact Us Today</Link>
-                </Button>
-              </motion.div>
-            </div>
-          </section>
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="
+                        absolute inset-0
+                        w-full h-full
+                        object-cover
+                      "
+                    />
+
+
+                    <div className="absolute inset-0 bg-black/60" />
+
+
+                    <div
+                      className="
+                        relative z-10
+                        h-full
+                        flex flex-col justify-end
+                        p-6
+                        text-white
+                      "
+                    >
+
+                      <h3 className="text-2xl font-bold mb-2">
+
+                        {item.title}
+
+                      </h3>
+
+
+                      <p className="text-sm text-white/90">
+
+                        {item.description}
+
+                      </p>
+
+                    </div>
+
+                  </motion.div>
+
+                ))}
+
+              </div>
+
+            </section>
+
+
+
+            {/* =====================================================
+               INDUSTRIES
+            ====================================================== */}
+            <section>
+
+              <SectionHeader
+                title="Industries We Serve"
+                subtitle="Supporting critical sectors with scalable solutions."
+              />
+
+
+              <div className="grid md:grid-cols-3 gap-8">
+
+                {industries.map((item, index) => (
+
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.06 }}
+                    className="
+                      relative
+                      rounded-3xl
+                      overflow-hidden
+                      shadow-xl
+                      h-[170px]
+                    "
+                  >
+
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="
+                        absolute inset-0
+                        w-full h-full
+                        object-cover
+                      "
+                    />
+
+
+                    <div className="absolute inset-0 bg-black/50" />
+
+
+                    <div
+                      className="
+                        relative z-10
+                        h-full
+                        flex items-end
+                        p-6
+                        text-white
+                      "
+                    >
+
+                      <h3 className="text-2xl font-bold">
+
+                        {item.title}
+
+                      </h3>
+
+                    </div>
+
+                  </motion.div>
+
+                ))}
+
+              </div>
+
+            </section>
+
+
+
+            {/* =====================================================
+               CTA
+            ====================================================== */}
+            <CTASection
+              title="Building Industry. Powering Innovation. Enabling the Future."
+              subtitle="Partner with TeleFort for engineering excellence, strategic supply solutions, and future-ready technologies."
+            />
+
+
+          </PageLayout>
+
+
         </main>
 
+
         <Footer />
+
       </div>
+
     </>
   );
 }

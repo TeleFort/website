@@ -1,164 +1,424 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Target, Heart, Award, TrendingUp } from 'lucide-react';
+
+import {
+  Calendar,
+  CheckCircle,
+} from 'lucide-react';
+
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 
-function AboutPage() {
-  const values = [
-    {
-      icon: Target,
-      title: 'Our Mission',
-      description: 'To deliver exceptional turnkey solutions that drive business success. We combine technical expertise with a deep understanding of our clients\' needs to create lasting value.',
-    },
-    {
-      icon: Heart,
-      title: 'Customer First',
-      description: 'Every decision we make starts with our clients. We listen, understand, and deliver solutions that truly address your challenges and opportunities.',
-    },
-    {
-      icon: Award,
-      title: 'Excellence',
-      description: 'We hold ourselves to the highest standards in everything we do. Quality, reliability, and attention to detail are non-negotiable.',
-    },
-    {
-      icon: TrendingUp,
-      title: 'Continuous Growth',
-      description: 'We invest in our team, our processes, and our technology to stay ahead. Your success depends on our ability to evolve and improve.',
-    },
-  ];
+import PageHero from '@/components/PageHero.jsx';
+import SectionHeader from '@/components/SectionHeader.jsx';
+import CTASection from '@/components/CTASection.jsx';
 
-  const culture = [
-    {
-      title: 'Collaborative Environment',
-      description: 'We believe the best solutions come from diverse perspectives working together. Our team culture encourages open communication and shared success.',
-    },
-    {
-      title: 'Accountability',
-      description: 'We take ownership of our commitments. When we say we\'ll deliver, you can count on it. This reliability is the foundation of our client relationships.',
-    },
-    {
-      title: 'Innovation',
-      description: 'We stay current with industry trends and emerging technologies, bringing fresh ideas and proven approaches to every project.',
-    },
-  ];
+
+/* =========================================================
+   IMAGES
+========================================================= */
+import heroImage from '@/assets/about/hero.jpg';
+
+import legacyImage from '@/assets/about/legacy.jpg';
+import missionImage from '@/assets/about/mission.jpg';
+import integrityImage from '@/assets/about/integrity.jpg';
+import futureImage from '@/assets/about/future.jpg';
+
+import journeyImage from '@/assets/about/journey.jpg';
+
+
+/* =========================================================
+   DATA
+========================================================= */
+const pillars = [
+  {
+    image: legacyImage,
+    title: 'Corporate Legacy',
+    description:
+      'Established in 2009, TeleFort has built a reputation rooted in trust, execution excellence, and long-term strategic relationships.',
+  },
+
+  {
+    image: missionImage,
+    title: 'Strategic Mission',
+    description:
+      'Delivering engineering, infrastructure, procurement, and technology solutions that create measurable organizational value.',
+  },
+
+  {
+    image: integrityImage,
+    title: 'Operational Integrity',
+    description:
+      'Professionalism, accountability, transparency, compliance, and quality remain central to every engagement.',
+  },
+
+  {
+    image: futureImage,
+    title: 'Future Focus',
+    description:
+      'Artificial intelligence, automation, digital transformation, and emerging technologies shape our future roadmap.',
+  },
+];
+
+
+const trustPoints = [
+  'Established in 2009',
+  'Public & Private Sector Experience',
+  'Engineering + Technology Integration',
+  'Nationwide Project Capability',
+];
+
+
+const values = [
+  {
+    title: 'Engineering Excellence',
+    bg: 'from-blue-600 to-indigo-700',
+  },
+
+  {
+    title: 'Strategic Partnerships',
+    bg: 'from-emerald-600 to-green-700',
+  },
+
+  {
+    title: 'Innovation & AI Adoption',
+    bg: 'from-violet-600 to-purple-700',
+  },
+
+  {
+    title: 'Reliable Execution',
+    bg: 'from-orange-600 to-amber-700',
+  },
+
+  {
+    title: 'Supply Chain Efficiency',
+    bg: 'from-cyan-600 to-sky-700',
+  },
+
+  {
+    title: 'National Development',
+    bg: 'from-rose-600 to-pink-700',
+  },
+];
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+function AboutPage() {
 
   return (
     <>
       <Helmet>
-        <title>About Us - TeleFort (Pvt.) Ltd</title>
-        <meta
-          name="description"
-          content="Learn about TeleFort's mission, values, and commitment to delivering exceptional turnkey solutions through teamwork, reliability, and customer satisfaction."
-        />
+
+        <title>
+          About Us - TeleFort (Pvt) Ltd
+        </title>
+
       </Helmet>
 
+
       <div className="min-h-screen flex flex-col">
+
         <Header />
 
-        <main className="flex-1">
-          <section className="py-20 bg-gradient-to-b from-primary/5 to-background">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-16"
-              >
-                <h1
-                  className="text-4xl md:text-5xl font-bold text-foreground mb-6"
-                  style={{ letterSpacing: '-0.02em', textWrap: 'balance' }}
-                >
-                  Building trust through reliable solutions
-                </h1>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                  At TeleFort, we're more than a service provider. We're your partner in success, committed to delivering turnkey solutions that exceed expectations.
-                </p>
-              </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {values.map((value, index) => (
-                  <motion.div
-                    key={value.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="bg-card rounded-2xl p-8 shadow-lg border border-border"
+        <main className="flex-1">
+
+
+          {/* =================================================
+             HERO
+          ================================================= */}
+          <PageHero
+            image={heroImage}
+            title="Built on Experience. Driven by Innovation."
+            subtitle="Since 2009, TeleFort has evolved into a diversified enterprise delivering engineering, procurement, industrial, and emerging technology solutions."
+          />
+
+
+          {/* =================================================
+             TRUST BAR
+          ================================================= */}
+          <section className="border-y bg-primary/5">
+
+            <div className="max-w-7xl mx-auto px-4 py-5">
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+                {trustPoints.map((point) => (
+
+                  <div
+                    key={point}
+                    className="
+                      flex
+                      items-center
+                      justify-center
+                      gap-2
+                      text-sm
+                      font-medium
+                    "
                   >
-                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
-                      <value.icon className="h-7 w-7 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-semibold text-card-foreground mb-3">{value.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{value.description}</p>
-                  </motion.div>
+
+                    <CheckCircle
+                      className="
+                        h-4
+                        w-4
+                        text-primary
+                      "
+                    />
+
+                    {point}
+
+                  </div>
+
                 ))}
+
               </div>
+
             </div>
+
           </section>
 
-          <section className="py-20 bg-background">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-12"
-              >
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4" style={{ textWrap: 'balance' }}>
-                  Our company culture
-                </h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  The values that guide our work and define who we are as a team.
-                </p>
-              </motion.div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {culture.map((item, index) => (
+          {/* =================================================
+             FOUNDATION
+          ================================================= */}
+          <section className="py-16 bg-muted">
+
+            <div className="max-w-7xl mx-auto px-4">
+
+              <SectionHeader
+                title="The TeleFort Foundation"
+                subtitle="The principles that guide every project, partnership, and innovation initiative."
+              />
+
+
+              <div className="grid md:grid-cols-2 gap-8">
+
+                {pillars.map((item, index) => (
+
                   <motion.div
                     key={item.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="bg-muted rounded-xl p-8"
+                    transition={{ delay: index * 0.08 }}
+                    className="
+                      relative
+                      rounded-3xl
+                      overflow-hidden
+                      shadow-xl
+                      min-h-[250px]
+                    "
                   >
-                    <h3 className="text-xl font-semibold text-foreground mb-3">{item.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="
+                        absolute inset-0
+                        w-full h-full
+                        object-cover
+                      "
+                    />
+
+
+                    <div className="absolute inset-0 bg-black/60" />
+
+
+                    <div
+                      className="
+                        relative z-10
+                        h-full
+                        flex flex-col justify-end
+                        p-8
+                        text-white
+                      "
+                    >
+
+                      <h3 className="text-3xl font-bold mb-4">
+
+                        {item.title}
+
+                      </h3>
+
+
+                      <p className="text-white/90 leading-relaxed">
+
+                        {item.description}
+
+                      </p>
+
+                    </div>
+
                   </motion.div>
+
                 ))}
+
               </div>
+
             </div>
+
           </section>
 
-          <section className="py-20 bg-muted">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="max-w-3xl mx-auto text-center"
-              >
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6" style={{ textWrap: 'balance' }}>
-                  Committed to your success
-                </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                  Our team brings together diverse expertise and a shared commitment to excellence. We don't just complete projects — we build partnerships that last. Every member of our team is dedicated to understanding your needs and delivering solutions that make a real difference.
-                </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  When you work with TeleFort, you're working with professionals who care about your success as much as you do. That's the foundation of everything we build together.
-                </p>
-              </motion.div>
+
+          {/* =================================================
+             JOURNEY
+             Height now matches foundation cards
+          ================================================= */}
+          <section className="py-16">
+
+            <div className="max-w-7xl mx-auto px-4">
+
+              <SectionHeader
+                title="Our Journey"
+                subtitle="A commitment to continuous growth and diversification."
+              />
+
+
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+
+                {/* Image */}
+                <div
+                  className="
+                    rounded-3xl
+                    overflow-hidden
+                    shadow-xl
+                    h-[250px]
+                  "
+                >
+
+                  <img
+                    src={journeyImage}
+                    alt="TeleFort Journey"
+                    className="
+                      w-full
+                      h-full
+                      object-cover
+                    "
+                  />
+
+                </div>
+
+
+                {/* Content */}
+                <div className="flex items-center">
+
+                  <div className="flex gap-4">
+
+                    <Calendar
+                      className="
+                        h-8
+                        w-8
+                        text-primary
+                        mt-1
+                      "
+                    />
+
+
+                    <div>
+
+                      <h3 className="text-3xl font-bold mb-4">
+
+                        Since 2009
+
+                      </h3>
+
+
+                      <p
+                        className="
+                          text-muted-foreground
+                          leading-relaxed
+                          text-lg
+                        "
+                      >
+
+                        From traditional engineering roots to
+                        infrastructure, procurement, industrial
+                        trading, enterprise software, automation,
+                        and AI-driven transformation—TeleFort
+                        continues to evolve with industry needs.
+
+                      </p>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
             </div>
+
           </section>
+
+
+          {/* =================================================
+             VALUES
+          ================================================= */}
+          <section className="py-16 bg-muted">
+
+            <div className="max-w-7xl mx-auto px-4">
+
+              <SectionHeader
+                title="What Drives Us"
+                subtitle="The values that shape every engagement."
+              />
+
+
+              <div className="grid md:grid-cols-3 gap-6">
+
+                {values.map((item) => (
+
+                  <div
+                    key={item.title}
+                    className={`
+                      rounded-3xl
+                      bg-gradient-to-br
+                      ${item.bg}
+                      p-8
+                      text-white
+                      shadow-xl
+                      hover:-translate-y-1
+                      transition-all
+                    `}
+                  >
+
+                    <h3 className="text-xl font-semibold">
+
+                      {item.title}
+
+                    </h3>
+
+                  </div>
+
+                ))}
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          {/* =================================================
+             CTA
+          ================================================= */}
+          <CTASection
+            title="Building Today. Enabling Tomorrow."
+            subtitle="TeleFort combines proven experience, strategic execution, and emerging technologies to help organizations succeed."
+          />
+
         </main>
 
+
         <Footer />
+
       </div>
+
     </>
   );
 }

@@ -1,126 +1,282 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
+
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
-import TestimonialCard from '@/components/TestimonialCard.jsx';
 
+import PageHero from '@/components/PageHero.jsx';
+import SectionHeader from '@/components/SectionHeader.jsx';
+import CTASection from '@/components/CTASection.jsx';
+
+
+/* =========================================================
+   IMAGES
+========================================================= */
+import heroImage from '@/assets/testimonials/hero.jpg';
+
+import integrityImage from '@/assets/testimonials/integrity.jpg';
+import deliveryImage from '@/assets/testimonials/delivery.jpg';
+import innovationImage from '@/assets/testimonials/innovation.jpg';
+
+
+/* =========================================================
+   DATA
+========================================================= */
+const testimonials = [
+  {
+    image: integrityImage,
+    title: 'Execution with Integrity',
+    quote:
+      'TeleFort approaches every engagement with professionalism, accountability, compliance, and a commitment to quality execution.',
+  },
+
+  {
+    image: deliveryImage,
+    title: 'Trusted Project Delivery',
+    quote:
+      'From engineering support to strategic procurement, TeleFort consistently demonstrates operational reliability and disciplined execution.',
+  },
+
+  {
+    image: innovationImage,
+    title: 'Future-Ready Solutions',
+    quote:
+      'TeleFort combines proven operational capability with emerging technologies, helping organizations prepare for tomorrow.',
+  },
+];
+
+
+const strengths = [
+  {
+    title: 'Engineering & Infrastructure',
+    bg: 'from-blue-600 to-indigo-700',
+  },
+
+  {
+    title: 'General Order Supplies',
+    bg: 'from-emerald-600 to-green-700',
+  },
+
+  {
+    title: 'Industrial Trading',
+    bg: 'from-violet-600 to-purple-700',
+  },
+
+  {
+    title: 'Strategic Procurement',
+    bg: 'from-orange-600 to-amber-700',
+  },
+
+  {
+    title: 'Technical Consultancy',
+    bg: 'from-cyan-600 to-sky-700',
+  },
+
+  {
+    title: 'Emerging Technologies',
+    bg: 'from-rose-600 to-pink-700',
+  },
+
+  {
+    title: 'AI-Driven Innovation',
+    bg: 'from-fuchsia-600 to-purple-700',
+  },
+
+  {
+    title: 'Public & Private Sector Support',
+    bg: 'from-lime-600 to-emerald-700',
+  },
+
+  {
+    title: 'Long-Term Partnerships',
+    bg: 'from-red-600 to-orange-700',
+  },
+];
+
+
+/* =========================================================
+   MAIN
+========================================================= */
 function TestimonialsPage() {
-  const testimonials = [
-    {
-      name: 'Priya Sharma',
-      company: 'Meridian Technologies',
-      quote: 'Working with TeleFort transformed our operations. Their team delivered exactly what we needed, on time and within budget. The level of professionalism and attention to detail was outstanding.',
-      rating: 5,
-    },
-    {
-      name: 'Marcus Chen',
-      company: 'Coastal Logistics',
-      quote: 'We needed a partner we could trust with a complex integration project. TeleFort exceeded our expectations at every turn. Their expertise and commitment to our success made all the difference.',
-      rating: 5,
-    },
-    {
-      name: 'Anika Bergström',
-      company: 'Nordic Solutions Group',
-      quote: 'The turnkey approach saved us months of coordination headaches. TeleFort handled everything seamlessly, and the results speak for themselves. Highly recommended.',
-      rating: 5,
-    },
-    {
-      name: 'Raj Patel',
-      company: 'Summit Industries',
-      quote: 'From our first conversation to final delivery, the TeleFort team was responsive, knowledgeable, and genuinely invested in our success. They\'ve become our go-to partner for critical projects.',
-      rating: 5,
-    },
-    {
-      name: 'Elena Rodriguez',
-      company: 'Apex Manufacturing',
-      quote: 'What impressed us most was their ability to understand our unique challenges and design solutions that fit perfectly. The implementation was smooth, and the ongoing support has been excellent.',
-      rating: 5,
-    },
-    {
-      name: 'Kwame Asante',
-      company: 'Horizon Ventures',
-      quote: 'TeleFort delivered a comprehensive solution that integrated seamlessly with our existing systems. Their technical expertise and project management skills are top-tier. We couldn\'t be happier with the results.',
-      rating: 5,
-    },
-  ];
 
   return (
     <>
       <Helmet>
-        <title>Client Testimonials - TeleFort (Pvt.) Ltd</title>
-        <meta
-          name="description"
-          content="Read what our clients say about TeleFort's turnkey solutions, professional service, and commitment to customer satisfaction."
-        />
+
+        <title>
+          Client Confidence - TeleFort (Pvt) Ltd
+        </title>
+
       </Helmet>
 
+
       <div className="min-h-screen flex flex-col">
+
         <Header />
 
+
         <main className="flex-1">
-          <section className="py-20 bg-gradient-to-b from-primary/5 to-background">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-16"
-              >
-                <h1
-                  className="text-4xl md:text-5xl font-bold text-foreground mb-6"
-                  style={{ letterSpacing: '-0.02em', textWrap: 'balance' }}
-                >
-                  What our clients say
-                </h1>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                  Don't just take our word for it. Here's what businesses across industries have to say about working with TeleFort.
-                </p>
-              </motion.div>
 
-              <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
-                {testimonials.map((testimonial, index) => (
-                  <TestimonialCard
-                    key={index}
-                    name={testimonial.name}
-                    company={testimonial.company}
-                    quote={testimonial.quote}
-                    rating={testimonial.rating}
-                    index={index}
-                  />
+
+          {/* =================================================
+             HERO
+          ================================================= */}
+          <PageHero
+            image={heroImage}
+            title="Client Confidence"
+            subtitle="Built on trust, execution excellence, and long-term strategic relationships since 2009."
+          />
+
+
+          {/* =================================================
+             TRUST STATEMENTS
+          ================================================= */}
+          <section className="py-16 bg-muted">
+
+            <div className="max-w-7xl mx-auto px-4">
+
+              <SectionHeader
+                title="Why Clients Trust TeleFort"
+                subtitle="Confidence built through measurable execution and lasting relationships."
+              />
+
+
+              <div className="grid md:grid-cols-3 gap-8">
+
+                {testimonials.map((item, index) => (
+
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.08 }}
+                    className="
+                      relative
+                      rounded-3xl
+                      overflow-hidden
+                      shadow-xl
+                      min-h-[250px]
+                    "
+                  >
+
+                    {/* Background image */}
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="
+                        absolute inset-0
+                        w-full h-full
+                        object-cover
+                      "
+                    />
+
+
+                    {/* Dark overlay */}
+                    <div className="absolute inset-0 bg-black/60" />
+
+
+                    {/* Content */}
+                    <div
+                      className="
+                        relative z-10
+                        h-full
+                        flex flex-col justify-end
+                        p-8
+                        text-white
+                      "
+                    >
+
+                      <h3 className="text-2xl font-bold mb-4">
+
+                        {item.title}
+
+                      </h3>
+
+
+                      <p className="text-white/90 leading-relaxed">
+
+                        {item.quote}
+
+                      </p>
+
+                    </div>
+
+                  </motion.div>
+
                 ))}
+
               </div>
+
             </div>
+
           </section>
 
-          <section className="py-20 bg-primary text-primary-foreground">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ textWrap: 'balance' }}>
-                  Ready to join our satisfied clients?
-                </h2>
-                <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-                  Let's discuss how we can help you achieve similar results with our turnkey solutions.
-                </p>
-                <a
-                  href="/contact"
-                  className="inline-flex items-center justify-center rounded-lg bg-white text-primary px-8 py-3 text-base font-medium hover:bg-white/90 transition-all duration-200 active:scale-[0.98]"
-                >
-                  Get in Touch
-                </a>
-              </motion.div>
+
+          {/* =================================================
+             CAPABILITIES
+          ================================================= */}
+          <section className="py-16 bg-background">
+
+            <div className="max-w-7xl mx-auto px-4">
+
+              <SectionHeader
+                title="Why Organizations Work With Us"
+                subtitle="Confidence built through capability, consistency, and innovation."
+              />
+
+
+              <div className="grid md:grid-cols-3 gap-6">
+
+                {strengths.map((item) => (
+
+                  <div
+                    key={item.title}
+                    className={`
+                      rounded-3xl
+                      bg-gradient-to-br
+                      ${item.bg}
+                      p-8
+                      text-white
+                      shadow-xl
+                      hover:-translate-y-1
+                      transition-all
+                    `}
+                  >
+
+                    <h3 className="text-xl font-semibold">
+
+                      {item.title}
+
+                    </h3>
+
+                  </div>
+
+                ))}
+
+              </div>
+
             </div>
+
           </section>
+
+
+          {/* =================================================
+             CTA
+          ================================================= */}
+          <CTASection
+            title="Relationships Built to Last"
+            subtitle="TeleFort believes trust is earned through delivery, integrity, and measurable results."
+          />
+
         </main>
 
+
         <Footer />
+
       </div>
+
     </>
   );
 }

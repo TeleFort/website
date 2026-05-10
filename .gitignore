@@ -1,0 +1,13 @@
+# dependencies
+node_modules/
+
+# vite
+dist/
+.vite/
+
+# env
+.env
+.env.local
+
+# logs
+npm-debug.log*

@@ -1,229 +1,535 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { toast } from 'sonner';
-import { Calendar, Clock, User, Mail, Loader2, Phone } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import pb from '@/lib/pocketbaseClient';
-import Header from '@/components/Header.jsx';
+import { motion } from 'framer-motion';
 
-export default function BookingPage() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+import { toast } from 'sonner';
+
+import pb from '@/lib/pocketbaseClient';
+
+import Header from '@/components/Header.jsx';
+import Footer from '@/components/Footer.jsx';
+
+import PageLayout from '@/components/PageLayout.jsx';
+import PageHero from '@/components/PageHero.jsx';
+import SectionHeader from '@/components/SectionHeader.jsx';
+import CTASection from '@/components/CTASection.jsx';
+
+
+/* =========================================================
+   IMAGES
+========================================================= */
+import heroImage from '@/assets/booking/hero.jpg';
+
+import consultationImage from '@/assets/booking/consultation.jpg';
+import executionImage from '@/assets/booking/execution.jpg';
+import innovationImage from '@/assets/booking/innovation.jpg';
+
+import requestImage from '@/assets/booking/request.jpg';
+import reviewImage from '@/assets/booking/review.jpg';
+import confirmImage from '@/assets/booking/confirm.jpg';
+import meetingImage from '@/assets/booking/meeting.jpg';
+
+
+/* =========================================================
+   DATA
+========================================================= */
+const whyBookCards = [
+  {
+    image: consultationImage,
+    title: 'Strategic Consultation',
+    text:
+      'Expert guidance tailored to your project goals.',
+  },
+
+  {
+    image: executionImage,
+    title: 'Execution Excellence',
+    text:
+      'Engineering, procurement, and delivery with precision.',
+  },
+
+  {
+    image: innovationImage,
+    title: 'Future-Ready Solutions',
+    text:
+      'Technology-driven transformation for modern enterprises.',
+  },
+];
+
+
+const bookingFlow = [
+  {
+    image: requestImage,
+    title: 'Request',
+  },
+
+  {
+    image: reviewImage,
+    title: 'Review',
+  },
+
+  {
+    image: confirmImage,
+    title: 'Confirm',
+  },
+
+  {
+    image: meetingImage,
+    title: 'Consult',
+  },
+];
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+function BookingPage() {
+
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     name: '',
+    organization: '',
     email: '',
-    whatsapp: '',
+    phone: '',
     date: '',
-    time: ''
+    time: '',
+    message: '',
   });
-  const [errors, setErrors] = useState({});
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-    }
 
-    if (!formData.whatsapp.trim()) {
-      newErrors.whatsapp = 'WhatsApp number is required';
-    } else if (!/^[0-9+\- ()]+$/.test(formData.whatsapp)) {
-      newErrors.whatsapp = 'Please enter a valid phone number';
-    }
+  function handleChange(e) {
 
-    if (!formData.date) newErrors.date = 'Date is required';
-    if (!formData.time) newErrors.time = 'Time is required';
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }));
-    }
-  };
+  }
 
-  const handleSubmit = async (e) => {
+
+  async function handleSubmit(e) {
+
     e.preventDefault();
-    
-    if (!validateForm()) return;
-    
-    setIsSubmitting(true);
-    
-    try {
-      // Format date for PocketBase (requires full datetime string or valid date string)
-      const bookingData = {
-        name: formData.name,
-        email: formData.email,
-        whatsapp: formData.whatsapp,
-        date: `${formData.date} 12:00:00.000Z`, // Append time to make it a valid PB date
-        time: formData.time
-      };
 
-      await pb.collection('bookings').create(bookingData, { $autoCancel: false });
-      
-      toast.success('Booking confirmed!', {
-        description: 'We have received your booking request and will be in touch shortly via WhatsApp/Email.'
+    try {
+
+      setLoading(true);
+
+      await pb
+        .collection('bookings')
+        .create({
+          ...formData,
+          status: 'pending',
+        });
+
+      toast.success(
+        'Consultation request submitted.'
+      );
+
+
+      setFormData({
+        name: '',
+        organization: '',
+        email: '',
+        phone: '',
+        date: '',
+        time: '',
+        message: '',
       });
-      
-      setFormData({ name: '', email: '', whatsapp: '', date: '', time: '' });
+
     } catch (error) {
-      console.error('Booking error:', error);
-      toast.error('Booking failed', {
-        description: error.message || 'There was a problem submitting your booking. Please try again.'
-      });
+
+      console.error(error);
+
+      toast.error(
+        'Something went wrong.'
+      );
+
     } finally {
-      setIsSubmitting(false);
+
+      setLoading(false);
+
     }
-  };
+
+  }
+
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <>
       <Helmet>
-        <title>Book an Appointment | TeleFort</title>
-        <meta name="description" content="Schedule your consultation with TeleFort today." />
-      </Helmet>
-      
-      <Header />
-      
-      <main className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-3">
-              Schedule a Consultation
-            </h1>
-            <p className="text-muted-foreground">
-              Choose a time that works for you and we'll get back to you to confirm.
-            </p>
-          </div>
 
-          <Card className="shadow-lg border-border/50">
-            <CardHeader>
-              <CardTitle>Booking Details</CardTitle>
-              <CardDescription>Fill out the form below to request an appointment.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      id="name"
+        <title>
+          Book Consultation | TeleFort
+        </title>
+
+      </Helmet>
+
+
+      <div className="min-h-screen flex flex-col">
+
+        <Header />
+
+
+        <main className="flex-1">
+
+
+          {/* HERO */}
+          <PageHero
+            image={heroImage}
+            title="Schedule a Strategic Consultation"
+            subtitle="Engineering, procurement, infrastructure, and emerging technology advisory."
+          />
+
+
+          <PageLayout>
+
+
+            {/* =====================================================
+               FORM SECTION
+            ====================================================== */}
+            <section>
+
+              <div className="grid lg:grid-cols-5 gap-10">
+
+
+                {/* LEFT */}
+                <div className="lg:col-span-2 lg:pl-8">
+
+                  <SectionHeader
+                    title="Why Book With TeleFort"
+                    subtitle="Strategic guidance backed by execution."
+                  />
+
+
+                  <div className="space-y-6">
+
+                    {whyBookCards.map((item, index) => (
+
+                      <motion.div
+                        key={item.title}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.08 }}
+                        className="
+                          relative
+                          rounded-3xl
+                          overflow-hidden
+                          shadow-xl
+                          h-[220px]
+                        "
+                      >
+
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="
+                            absolute inset-0
+                            w-full h-full
+                            object-cover
+                          "
+                        />
+
+
+                        <div className="absolute inset-0 bg-black/60" />
+
+
+                        <div
+                          className="
+                            relative z-10
+                            h-full
+                            flex flex-col justify-end
+                            p-6
+                            text-white
+                          "
+                        >
+
+                          <h3 className="text-xl font-bold mb-1">
+
+                            {item.title}
+
+                          </h3>
+
+
+                          <p className="text-white/90 text-sm">
+
+                            {item.text}
+
+                          </p>
+
+                        </div>
+
+                      </motion.div>
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+
+
+                {/* RIGHT */}
+                <div className="lg:col-span-3 lg:pr-8">
+
+                  <SectionHeader
+                    title="Book Your Session"
+                    subtitle="Tell us about your requirement."
+                  />
+
+
+                  <form
+                    onSubmit={handleSubmit}
+                    className="
+                      bg-primary/5
+                      border-2 border-primary/15
+                      rounded-3xl
+                      p-8
+                      shadow-xl
+                      space-y-5
+                    "
+                  >
+
+                    <input
                       name="name"
-                      placeholder="Maya Chen"
-                      className="pl-10"
+                      placeholder="Full Name"
                       value={formData.name}
                       onChange={handleChange}
-                      disabled={isSubmitting}
+                      required
+                      className="
+                        w-full
+                        bg-white
+                        border-2 border-primary/15
+                        rounded-xl
+                        p-4
+                      "
                     />
-                  </div>
-                  {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
-                </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      id="email"
+
+                    <input
+                      name="organization"
+                      placeholder="Organization"
+                      value={formData.organization}
+                      onChange={handleChange}
+                      className="
+                        w-full
+                        bg-white
+                        border-2 border-primary/15
+                        rounded-xl
+                        p-4
+                      "
+                    />
+
+
+                    <input
                       name="email"
-                      type="email"
-                      placeholder="maya@example.com"
-                      className="pl-10"
+                      placeholder="Email Address"
                       value={formData.email}
                       onChange={handleChange}
-                      disabled={isSubmitting}
+                      required
+                      className="
+                        w-full
+                        bg-white
+                        border-2 border-primary/15
+                        rounded-xl
+                        p-4
+                      "
                     />
-                  </div>
-                  {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
-                </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="whatsapp">WhatsApp Number (Pakistan)</Label>
-                  <div className="relative">
-                    <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      id="whatsapp"
-                      name="whatsapp"
-                      type="tel"
-                      placeholder="+92 300 1234567"
-                      className="pl-10"
-                      value={formData.whatsapp}
+
+                    <input
+                      name="phone"
+                      placeholder="Phone / WhatsApp"
+                      value={formData.phone}
                       onChange={handleChange}
-                      disabled={isSubmitting}
+                      required
+                      className="
+                        w-full
+                        bg-white
+                        border-2 border-primary/15
+                        rounded-xl
+                        p-4
+                      "
                     />
-                  </div>
-                  <p className="text-xs text-muted-foreground">e.g., +92 300 1234567 or 03001234567</p>
-                  {errors.whatsapp && <p className="text-sm text-destructive">{errors.whatsapp}</p>}
-                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <Label htmlFor="date">Preferred Date</Label>
-                    <div className="relative">
-                      <Calendar className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="date"
-                        name="date"
+
+                    <div className="grid md:grid-cols-2 gap-5">
+
+                      <input
                         type="date"
-                        className="pl-10"
+                        name="date"
                         value={formData.date}
                         onChange={handleChange}
-                        min={new Date().toISOString().split('T')[0]}
-                        disabled={isSubmitting}
+                        required
+                        className="
+                          w-full
+                          bg-white
+                          border-2 border-primary/15
+                          rounded-xl
+                          p-4
+                        "
                       />
-                    </div>
-                    {errors.date && <p className="text-sm text-destructive">{errors.date}</p>}
-                  </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="time">Preferred Time</Label>
-                    <div className="relative">
-                      <Clock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="time"
-                        name="time"
+
+                      <input
                         type="time"
-                        className="pl-10"
+                        name="time"
                         value={formData.time}
                         onChange={handleChange}
-                        disabled={isSubmitting}
+                        required
+                        className="
+                          w-full
+                          bg-white
+                          border-2 border-primary/15
+                          rounded-xl
+                          p-4
+                        "
                       />
+
                     </div>
-                    {errors.time && <p className="text-sm text-destructive">{errors.time}</p>}
-                  </div>
+
+
+                    <textarea
+                      rows="5"
+                      name="message"
+                      placeholder="Project details"
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="
+                        w-full
+                        bg-white
+                        border-2 border-primary/15
+                        rounded-xl
+                        p-4
+                      "
+                    />
+
+
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="
+                        w-full
+                        bg-primary
+                        text-white
+                        rounded-xl
+                        py-4
+                        font-semibold
+                        hover:opacity-90
+                        transition
+                      "
+                    >
+
+                      {
+                        loading
+                          ? 'Submitting...'
+                          : 'Confirm Booking'
+                      }
+
+                    </button>
+
+                  </form>
+
                 </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full mt-6" 
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Confirming...
-                    </>
-                  ) : (
-                    'Confirm Booking'
-                  )}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
-    </div>
+              </div>
+
+            </section>
+
+
+
+            {/* =====================================================
+               PROCESS
+            ====================================================== */}
+            <section>
+
+              <SectionHeader
+                title="How Booking Works"
+                subtitle="A simple four-step engagement process."
+              />
+
+
+              <div className="grid md:grid-cols-4 gap-8">
+
+                {bookingFlow.map((item, index) => (
+
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.08 }}
+                    className="
+                      relative
+                      rounded-3xl
+                      overflow-hidden
+                      shadow-xl
+                      h-[170px]
+                    "
+                  >
+
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="
+                        absolute inset-0
+                        w-full h-full
+                        object-cover
+                      "
+                    />
+
+
+                    <div className="absolute inset-0 bg-black/60" />
+
+
+                    <div
+                      className="
+                        relative z-10
+                        h-full
+                        flex items-end
+                        p-6
+                        text-white
+                      "
+                    >
+
+                      <h3 className="text-2xl font-bold">
+
+                        {item.title}
+
+                      </h3>
+
+                    </div>
+
+                  </motion.div>
+
+                ))}
+
+              </div>
+
+            </section>
+
+
+
+            {/* CTA */}
+            <CTASection
+              title="Your Next Strategic Move Starts Here."
+              subtitle="Book a consultation and let's build something impactful."
+            />
+
+
+          </PageLayout>
+
+
+        </main>
+
+
+        <Footer />
+
+      </div>
+
+    </>
   );
 }
+
+export default BookingPage;

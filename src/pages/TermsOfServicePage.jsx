@@ -20,7 +20,7 @@ function TermsOfServicePage() {
         <Header />
 
         <main className="flex-1 bg-background">
-          <section className="py-16 md:py-24">
+          <section className="py-16 md:py-16">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

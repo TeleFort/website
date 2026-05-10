@@ -1,122 +1,195 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
+import {
+  Phone,
+  Mail,
+  MapPin
+} from 'lucide-react';
+
+
+/* =========================================================
+   STANDARD FOOTER
+   Global vertical rhythm = pt-8 pb-8
+========================================================= */
 function Footer() {
-  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-950 text-slate-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+    <footer className="bg-primary text-white">
+
+      <div className="max-w-7xl mx-auto px-4 pt-8 pb-8">
+
+
+        {/* MAIN GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+
+          {/* COMPANY */}
           <div>
-            <div className="flex items-center mb-4">
-              <span className="text-2xl font-bold text-white">TeleFort</span>
-              <span className="text-sm text-slate-400 ml-1">(Pvt.) Ltd.</span>
-            </div>
-            <p className="text-slate-400 text-sm leading-relaxed">
-              Delivering turnkey solutions with a commitment to customer satisfaction, teamwork, and reliability.
+
+            <h3 className="text-2xl font-bold mb-4">
+
+              TeleFort (Pvt) Ltd.
+
+            </h3>
+
+
+            <p className="text-white/80 leading-relaxed">
+
+              Delivering engineering excellence,
+              infrastructure development,
+              general order supplies,
+              industrial trading,
+              and emerging technology solutions
+              for public and private sector
+              organizations.
+
             </p>
+
           </div>
 
+
+          {/* QUICK LINKS */}
           <div>
-            <span className="text-base font-semibold text-white mb-4 block">Quick Links</span>
-            <nav className="flex flex-col space-y-2">
-              <Link to="/" className="text-slate-400 hover:text-white transition-colors duration-200 text-sm">
+
+            <h3 className="text-xl font-semibold mb-4 text-secondary">
+
+              Quick Links
+
+            </h3>
+
+
+            <div className="flex flex-col space-y-2">
+
+              <Link
+                to="/"
+                className="text-white/80 hover:text-secondary transition-colors"
+              >
                 Home
               </Link>
-              <Link to="/services" className="text-slate-400 hover:text-white transition-colors duration-200 text-sm">
+
+
+              <Link
+                to="/services"
+                className="text-white/80 hover:text-secondary transition-colors"
+              >
                 Services
               </Link>
-              <Link to="/about" className="text-slate-400 hover:text-white transition-colors duration-200 text-sm">
+
+
+              <Link
+                to="/about"
+                className="text-white/80 hover:text-secondary transition-colors"
+              >
                 About Us
               </Link>
-              <Link to="/testimonials" className="text-slate-400 hover:text-white transition-colors duration-200 text-sm">
-                Testimonials
-              </Link>
-              <Link to="/contact" className="text-slate-400 hover:text-white transition-colors duration-200 text-sm">
+
+
+              <Link
+                to="/contact"
+                className="text-white/80 hover:text-secondary transition-colors"
+              >
                 Contact
               </Link>
-            </nav>
+
+
+              <Link
+                to="/booking"
+                className="text-white/80 hover:text-secondary transition-colors"
+              >
+                Book Now
+              </Link>
+
+            </div>
+
           </div>
 
+
+          {/* CONTACT */}
           <div>
-            <span className="text-base font-semibold text-white mb-4 block">Contact Info</span>
-            <div className="flex flex-col space-y-3">
-              <div className="flex items-start space-x-3">
-                <Phone className="h-4 w-4 text-slate-400 mt-0.5 flex-shrink-0" />
-                <span className="text-slate-400 text-sm">+92 331 655 9887</span>
+
+            <h3 className="text-xl font-semibold mb-4 text-secondary">
+
+              Contact Information
+
+            </h3>
+
+
+            <div className="space-y-3">
+
+
+              <div className="flex items-center gap-3">
+
+                <Phone className="h-5 w-5 text-secondary" />
+
+                <span className="text-white/80">
+
+                  +92 331 6559887
+
+                </span>
+
               </div>
-              <div className="flex items-start space-x-3">
-                <Mail className="h-4 w-4 text-slate-400 mt-0.5 flex-shrink-0" />
-                <span className="text-slate-400 text-sm">telefort@gmail.com</span>
+
+
+              <div className="flex items-center gap-3">
+
+                <Mail className="h-5 w-5 text-secondary" />
+
+                <span className="text-white/80">
+
+                  telefort@gmail.com
+
+                </span>
+
               </div>
-              <div className="flex items-start space-x-3">
-                <MapPin className="h-4 w-4 text-slate-400 mt-0.5 flex-shrink-0" />
-                <span className="text-slate-400 text-sm">245-B, Lake City Meadows, Lahore, Pakistan</span>
+
+
+              <div className="flex items-center gap-3">
+
+                <MapPin className="h-5 w-5 text-secondary" />
+
+                <span className="text-white/80">
+
+                  Lahore, Pakistan
+
+                </span>
+
               </div>
+
             </div>
+
           </div>
 
-          <div>
-            <span className="text-base font-semibold text-white mb-4 block">Follow Us</span>
-            <div className="flex space-x-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors duration-200"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors duration-200"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors duration-200"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors duration-200"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-            </div>
-          </div>
         </div>
 
-        <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-slate-400 text-sm">
-            © {currentYear} TeleFort (Pvt.) Ltd. All rights reserved.
+
+        {/* COPYRIGHT */}
+        <div
+          className="
+            border-t border-white/20
+            mt-8
+            pt-6
+            text-center
+          "
+        >
+
+          <p className="text-white/70">
+
+            © {new Date().getFullYear()}
+            {' '}
+            TeleFort (Pvt) Ltd.
+            {' '}
+            All rights reserved.
+
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="/privacy" className="text-slate-400 hover:text-white transition-colors duration-200 text-sm font-medium">
-              Privacy Policy
-            </Link>
-            <Link to="/terms" className="text-slate-400 hover:text-white transition-colors duration-200 text-sm font-medium">
-              Terms of Service
-            </Link>
-          </div>
+
         </div>
+
       </div>
+
     </footer>
+
   );
 }
 
