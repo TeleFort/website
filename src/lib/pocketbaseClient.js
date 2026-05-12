@@ -1,6 +1,6 @@
 import Pocketbase from 'pocketbase';
 
-const POCKETBASE_API_URL = "http://127.0.0.1:8090";
+const POCKETBASE_API_URL = 'https://reproach-calorie-donator.ngrok-free.dev';
 
 const pocketbaseClient = new Pocketbase(POCKETBASE_API_URL);
 
