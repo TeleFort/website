@@ -95,7 +95,7 @@ const industries = [
 
   {
     image: infrastructureImage,
-    title: 'Infrastructure',
+    title: 'Buildings & Infrastructure',
   },
 ];
 
