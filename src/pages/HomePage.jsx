@@ -80,12 +80,12 @@ const industries = [
 
   {
     image: defenceImage,
-    title: 'Defence',
+    title: 'Defence & Security',
   },
 
   {
     image: educationImage,
-    title: 'Education',
+    title: 'Education & Research',
   },
 
   {
