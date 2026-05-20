@@ -75,7 +75,7 @@ const industries = [
 
   {
     image: telecomImage,
-    title: 'Telecom',
+    title: 'Emerging Technologies',
   },
 
   {
