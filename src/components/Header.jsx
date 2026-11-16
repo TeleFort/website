@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 
-import logo from '@/assets/telefort-logo.png';
+import logo from '@/assets/telefort-logo-primary-green.svg';
 
 import {
   Sheet,
@@ -57,21 +57,25 @@ function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 
-        <div className="flex h-20 items-center justify-between">
+        <div className="flex h-24 items-center justify-between">
 
 
           {/* =====================================================
              LOGO
+             Brand guide: min 120 px wide, clear space = one star
+             height, never stretched (fixed width, auto height).
           ====================================================== */}
           <Link
             to="/"
-            className="flex items-center gap-3 shrink-0"
+            className="flex items-center gap-4 shrink-0"
           >
 
             <img
               src={logo}
               alt="TeleFort"
-              className="h-12 md:h-14 w-auto"
+              width="128"
+              height="75"
+              className="w-[128px] h-auto shrink-0"
             />
 
 
@@ -86,7 +90,7 @@ function Header() {
 
               <p className="text-xs text-muted-foreground">
 
-                Established since 2009
+                Established 2009
 
               </p>
 
@@ -107,9 +111,11 @@ function Header() {
                 key={link.path}
                 to={link.path}
                 className={`
-                  px-4
+                  px-2.5
+                  xl:px-4
                   py-2
                   rounded-xl
+                  whitespace-nowrap
                   text-sm
                   font-medium
                   transition-all
@@ -140,9 +146,11 @@ function Header() {
               hidden md:flex
               items-center
               justify-center
-              px-6
+              px-4
+              xl:px-6
               py-2.5
               rounded-xl
+              whitespace-nowrap
               font-semibold
               bg-secondary
               text-primary
@@ -187,31 +195,15 @@ function Header() {
             >
 
 
-              <div className="mt-8 mb-8 flex items-center gap-3">
+              <div className="mt-8 mb-8">
 
                 <img
                   src={logo}
                   alt="TeleFort"
-                  className="h-10"
+                  width="128"
+                  height="75"
+                  className="w-[128px] h-auto"
                 />
-
-
-                <div>
-
-                  <p className="font-bold text-primary">
-
-                    TeleFort
-
-                  </p>
-
-
-                  <p className="text-xs text-muted-foreground">
-
-                    (Pvt) Ltd.
-
-                  </p>
-
-                </div>
 
               </div>
 

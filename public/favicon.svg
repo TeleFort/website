@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TeleFort simplified icon "TF". Glyphs copied verbatim from the outlined wordmark in
+     02_SVG/TeleFort_Logo_Primary_Green.svg (Bookman bold, outlined from TeX Gyre Bonum Bold).
+     Only translated and uniformly scaled; no font is used. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="TeleFort">
+<title>TeleFort</title>
+<rect width="512" height="512" rx="51.2" fill="#11553C"/>
+<g transform="translate(-331.577 -334.988) scale(3.296)" fill="#F4E7B5" stroke="#F4E7B5" stroke-width="2.5" stroke-linejoin="round">
+<path d="M177.49 166.5 169.71 146.62H116.82L109.62 166.5L116.82 169.28C120.18 161.12 126.9 155.36 133.33 155.36C134.77 155.36 134.96 155.65 134.96 159.01V195.87C134.96 200 134.96 203.65 128.43 203.94L125.55 204.13V212H161.17V204.13L158.29 203.94C151.86 203.65 151.76 200.19 151.76 195.87V158.72C151.76 155.55 151.95 155.36 153.68 155.36C161.74 155.36 167.31 164 170.48 169.28Z"/>
+<path transform="translate(-136.77 0)" d="M383.7 166.3 374.58 146.62H319.76V154.5L321.68 154.69C327.06 155.26 328.21 156.61 328.21 162.75V195.87C328.21 202.02 327.06 203.36 321.68 203.94L319.76 204.13V212H354.13V204.13L351.54 203.94C345.39 203.36 345.01 200.96 345.01 195.87V182.34H347.22C353.55 182.34 356.62 182.34 357.58 193.57H364.69V162.46H357.58C356.62 172.35 354.8 172.93 347.79 172.93H345.01V163.9C345.01 157.66 345.01 155.74 353.07 155.74C363.06 155.74 369.58 159.49 377.07 169.66Z"/>
+</g>
+</svg>

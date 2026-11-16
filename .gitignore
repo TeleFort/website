@@ -11,3 +11,5 @@ dist/
 
 # logs
 npm-debug.log*
+# official logo master package (lives outside the site, never commit)
+TeleFortLogoMasterPackage/

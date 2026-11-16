@@ -110,7 +110,7 @@ function HomePage() {
       <Helmet>
 
         <title>
-          TeleFort (Pvt) Ltd
+          TeleFort (Pvt) Ltd. | Engineering, Infrastructure &amp; Supply
         </title>
 
       </Helmet>

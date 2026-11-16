@@ -7,6 +7,8 @@ import {
   MapPin
 } from 'lucide-react';
 
+import logoReversed from '@/assets/telefort-logo-reversed-gold.svg';
+
 
 /* =========================================================
    STANDARD FOOTER
@@ -28,11 +30,36 @@ function Footer() {
           {/* COMPANY */}
           <div>
 
-            <h3 className="text-2xl font-bold mb-4">
+            {/* Same lockup as the header (logo + name side by side),
+                in Brand Gold #F4E7B5 with the Reversed_Gold logo
+                for the dark brand-green footer. */}
+            <div className="flex items-center gap-4 mb-4 text-[#F4E7B5]">
 
-              TeleFort (Pvt) Ltd.
+              <img
+                src={logoReversed}
+                alt="TeleFort"
+                width="128"
+                height="75"
+                className="w-[128px] h-auto shrink-0"
+              />
 
-            </h3>
+              <div>
+
+                <h3 className="text-lg font-bold">
+
+                  TeleFort (Pvt) Ltd.
+
+                </h3>
+
+                <p className="text-xs">
+
+                  Established 2009
+
+                </p>
+
+              </div>
+
+            </div>
 
 
             <p className="text-white/80 leading-relaxed">
